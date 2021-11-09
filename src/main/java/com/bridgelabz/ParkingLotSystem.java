@@ -28,6 +28,16 @@ public class ParkingLotSystem {
     }
 
     /**
+     * Purpose : This method is created to unpark the vehicle
+     *
+     * @param vehicle : takes vehicle as parameter
+     */
+    public void unPark(Vehicle vehicle) {
+        if (this.vehicle.equals(vehicle))
+            this.vehicle = null;
+    }
+
+    /**
      * Purpose : This method is created to check
      * the vehicle is parked or not
      *
@@ -36,5 +46,16 @@ public class ParkingLotSystem {
      */
     public boolean isVehicleParked(Vehicle vehicle) {
         return this.vehicle.equals(vehicle);
+    }
+
+    /**
+     * Purpose : This method is created to check
+     * the vehicle is unparked or not
+     *
+     * @param vehicle : takes vehicle as parameter
+     * @return the vehicle is unparked
+     */
+    public boolean isVehicleUnParked(Vehicle vehicle) {
+        return this.vehicle == null;
     }
 }
