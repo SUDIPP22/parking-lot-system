@@ -27,7 +27,7 @@ public class ParkingLotSystemTest {
     }
 
     @Test
-    void givenAVehicle_WhenUnParked_ThenCheckIfUnParked_ShouldReturnTrue() {
+    void givenAVehicle_WhenUnParked_ThenCheckIfUnParked_ShouldReturnTrue() throws ParkingLotSystemException {
         vehicle = new Vehicle("AUDI", "IN-A8002");
         parkingLotSystem.park(vehicle);
         parkingLotSystem.unPark(vehicle);
@@ -50,5 +50,15 @@ public class ParkingLotSystemTest {
         parkingLotSystem.park(vehicle1);
         boolean isParked = parkingLotSystem.isVehicleParked(vehicle2);
         Assertions.assertFalse(isParked);
+    }
+
+    @Test
+    void givenANullVehicle_WhenUnParked_ShouldThrowException() {
+        try {
+            vehicle = null;
+            parkingLotSystem.unPark(vehicle);
+        } catch (ParkingLotSystemException exception) {
+            Assertions.assertEquals(ParkingLotSystemException.ExceptionType.NO_SUCH_VEHICLE, exception.exceptionType);
+        }
     }
 }
