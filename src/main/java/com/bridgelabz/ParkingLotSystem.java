@@ -31,9 +31,13 @@ public class ParkingLotSystem {
      * Purpose : This method is created to unpark the vehicle
      *
      * @param vehicle : takes vehicle as parameter
+     * @throws ParkingLotSystemException : when there is no vehicle to unpark
      */
-    public void unPark(Vehicle vehicle) {
-        if (this.vehicle.equals(vehicle))
+    public void unPark(Vehicle vehicle) throws ParkingLotSystemException {
+        if (this.vehicle == null) {
+            throw new ParkingLotSystemException
+                    (ParkingLotSystemException.ExceptionType.NO_SUCH_VEHICLE, "Vehicles can not be null");
+        } else if (this.vehicle.equals(vehicle))
             this.vehicle = null;
     }
 
