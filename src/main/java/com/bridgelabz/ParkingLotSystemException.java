@@ -15,5 +15,5 @@ public class ParkingLotSystemException extends Exception {
         this.exceptionType = exceptionType;
     }
 
-    public enum ExceptionType {NO_SUCH_VEHICLE}
+    public enum ExceptionType {PARKING_LOT_IS_FULL, NO_SUCH_VEHICLE}
 }
