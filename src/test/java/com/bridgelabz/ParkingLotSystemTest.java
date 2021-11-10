@@ -7,10 +7,12 @@ import org.junit.jupiter.api.Test;
 public class ParkingLotSystemTest {
     ParkingLotSystem parkingLotSystem = null;
     Vehicle vehicle = null;
+    ParkingLotSystemOwner owner = null;
 
     @BeforeEach
     void setUp() {
-        parkingLotSystem = new ParkingLotSystem();
+        parkingLotSystem = new ParkingLotSystem(3);
+        owner = new ParkingLotSystemOwner();
     }
 
     @Test
@@ -110,6 +112,26 @@ public class ParkingLotSystemTest {
             parkingLotSystem.park(vehicle);
         } catch (ParkingLotSystemException exception) {
             if (parkingLotSystem.isParkingLotFull())
+                Assertions.assertEquals(ParkingLotSystemException.ExceptionType.PARKING_LOT_IS_FULL,
+                        exception.exceptionType);
+        }
+    }
+
+    @Test
+    void givenVehicles_WhenParkingLotIsFull_ShouldInformTheOwner() {
+        parkingLotSystem.addOwnerObserver(owner);
+        Vehicle vehicle1 = new Vehicle("AUDI", "WB-L98754");
+        Vehicle vehicle2 = new Vehicle("TOYOTA", "IN-65821");
+        Vehicle vehicle3 = new Vehicle("ASTON MARTIN", "UK-0096");
+        Vehicle vehicle4 = new Vehicle("VOLKSWAGEN", "JPN-1587");
+        try {
+            parkingLotSystem.park(vehicle1);
+            parkingLotSystem.park(vehicle2);
+            parkingLotSystem.park(vehicle3);
+            parkingLotSystem.park(vehicle4);
+            boolean capacityFull = owner.getParkingLotStatusIfCapacityFull();
+            Assertions.assertTrue(capacityFull);
+        } catch (ParkingLotSystemException exception) {
             Assertions.assertEquals(ParkingLotSystemException.ExceptionType.PARKING_LOT_IS_FULL,
                     exception.exceptionType);
         }

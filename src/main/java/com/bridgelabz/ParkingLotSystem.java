@@ -8,7 +8,15 @@ package com.bridgelabz;
  * @since 2021-11-09
  */
 public class ParkingLotSystem {
+    private final int actualCapacity;
     private Vehicle vehicle;
+    private ParkingLotSystemOwner owner;
+    private int currentCapacity;
+
+    public ParkingLotSystem(int capacity) {
+        this.currentCapacity = 0;
+        this.actualCapacity = capacity;
+    }
 
     /**
      * Purpose : This method is created to print welcome message
@@ -24,11 +32,13 @@ public class ParkingLotSystem {
      * @throws ParkingLotSystemException : when the parking lot is full
      */
     public void park(Vehicle vehicle) throws ParkingLotSystemException {
-        if (this.vehicle == null)
-            this.vehicle = vehicle;
-        else if (this.vehicle != null)
+        if (this.currentCapacity == this.actualCapacity) {
+            owner.setParkingLotCapacity();
             throw new ParkingLotSystemException
                     (ParkingLotSystemException.ExceptionType.PARKING_LOT_IS_FULL, "Parking Lot is Full");
+        }
+        this.currentCapacity++;
+        this.vehicle = vehicle;
     }
 
     /**
@@ -74,5 +84,14 @@ public class ParkingLotSystem {
      */
     public boolean isParkingLotFull() {
         return this.vehicle != null;
+    }
+
+    /**
+     * Purpose : This method is created to add parking lot owner observer
+     *
+     * @param owner : takes the parking lot owner as parameter
+     */
+    public void addOwnerObserver(ParkingLotSystemOwner owner) {
+        this.owner = owner;
     }
 }
