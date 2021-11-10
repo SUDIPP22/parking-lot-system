@@ -21,10 +21,14 @@ public class ParkingLotSystem {
      * Purpose : This method is created to park the vehicle
      *
      * @param vehicle : takes vehicle as parameter
+     * @throws ParkingLotSystemException : when the parking lot is full
      */
-    public void park(Vehicle vehicle) {
+    public void park(Vehicle vehicle) throws ParkingLotSystemException {
         if (this.vehicle == null)
             this.vehicle = vehicle;
+        else if (this.vehicle != null)
+            throw new ParkingLotSystemException
+                    (ParkingLotSystemException.ExceptionType.PARKING_LOT_IS_FULL, "Parking Lot is Full");
     }
 
     /**
