@@ -77,4 +77,29 @@ public class ParkingLotSystemTest {
             Assertions.assertEquals(ParkingLotSystemException.ExceptionType.NO_SUCH_VEHICLE, exception.exceptionType);
         }
     }
+
+    @Test
+    void givenAVehicle_WhenCheckingIfParkingLotIsFull_ShouldReturnTrue() {
+        vehicle = new Vehicle("HYUNDAI", "WB-P98754");
+        try {
+            parkingLotSystem.park(vehicle);
+            boolean checkingIfFull = parkingLotSystem.isParkingLotFull();
+            Assertions.assertTrue(checkingIfFull);
+        } catch (ParkingLotSystemException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void givenAVehicle_WhenCheckingIfParkingLotIsNotFull_ShouldReturnFalse() {
+        vehicle = new Vehicle("JAGUAR", "IN-K9658");
+        try {
+            parkingLotSystem.park(vehicle);
+            parkingLotSystem.unPark(vehicle);
+            boolean checkingIfNotFull = parkingLotSystem.isParkingLotFull();
+            Assertions.assertFalse(checkingIfNotFull);
+        } catch (ParkingLotSystemException e) {
+            e.printStackTrace();
+        }
+    }
 }

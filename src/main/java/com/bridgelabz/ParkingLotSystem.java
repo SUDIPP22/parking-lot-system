@@ -66,4 +66,13 @@ public class ParkingLotSystem {
     public boolean isVehicleUnParked(Vehicle vehicle) {
         return this.vehicle == null;
     }
+
+    /**
+     * Purpose : This method is created for checking whether the parking lot is full or not
+     *
+     * @return the checked value
+     */
+    public boolean isParkingLotFull() {
+        return this.vehicle != null;
+    }
 }
