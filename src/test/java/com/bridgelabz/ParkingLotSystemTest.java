@@ -102,4 +102,16 @@ public class ParkingLotSystemTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    void givenAVehicle_WhenParkingLotIsFull_ShouldRedirectToAirportSecurityStaff() {
+        vehicle = new Vehicle("ROLLS ROYCE", "WB-KL2695");
+        try {
+            parkingLotSystem.park(vehicle);
+        } catch (ParkingLotSystemException exception) {
+            if (parkingLotSystem.isParkingLotFull())
+            Assertions.assertEquals(ParkingLotSystemException.ExceptionType.PARKING_LOT_IS_FULL,
+                    exception.exceptionType);
+        }
+    }
 }
