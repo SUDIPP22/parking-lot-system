@@ -19,6 +19,14 @@ public class AirportSecurity implements Observer {
     }
 
     /**
+     * Purpose : This method is created to set the status of parking capacity available in the parking lot
+     */
+    @Override
+    public void setParkingCapacityAvailable() {
+        isParkingLotFull = false;
+    }
+
+    /**
      * Purpose : This method is created to get back the status of full capacity of parking lot
      *
      * @return the status of the parking lot

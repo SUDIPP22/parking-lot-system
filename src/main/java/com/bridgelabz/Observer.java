@@ -1,7 +1,8 @@
 package com.bridgelabz;
 
 /**
- * Purpose : To segregate the setParkingLotCapacity() method for parking lot system
+ * Purpose : To segregate the setParkingLotCapacity() and
+ * setParkingCapacityAvailable() method for parking lot system
  *
  * @author SUDIP PANJA
  * @version '1.0-SNAPSHOT'
@@ -9,4 +10,6 @@ package com.bridgelabz;
  */
 public interface Observer {
     void setParkingLotCapacity();
+
+    void setParkingCapacityAvailable();
 }
