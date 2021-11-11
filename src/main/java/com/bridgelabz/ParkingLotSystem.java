@@ -1,5 +1,8 @@
 package com.bridgelabz;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Purpose : To simulate parking lot system
  *
@@ -9,12 +12,12 @@ package com.bridgelabz;
  */
 public class ParkingLotSystem {
     private final int actualCapacity;
-    private Vehicle vehicle;
+    private List<Vehicle> vehicle;
     private ParkingLotSystemOwner owner;
-    private int currentCapacity;
+
 
     public ParkingLotSystem(int capacity) {
-        this.currentCapacity = 0;
+        this.vehicle = new ArrayList<>();
         this.actualCapacity = capacity;
     }
 
@@ -32,13 +35,12 @@ public class ParkingLotSystem {
      * @throws ParkingLotSystemException : when the parking lot is full
      */
     public void park(Vehicle vehicle) throws ParkingLotSystemException {
-        if (this.currentCapacity == this.actualCapacity) {
+        if (this.vehicle.size() == this.actualCapacity) {
             owner.setParkingLotCapacity();
             throw new ParkingLotSystemException
                     (ParkingLotSystemException.ExceptionType.PARKING_LOT_IS_FULL, "Parking Lot is Full");
         }
-        this.currentCapacity++;
-        this.vehicle = vehicle;
+        this.vehicle.add(vehicle);
     }
 
     /**
@@ -51,7 +53,7 @@ public class ParkingLotSystem {
         if (this.vehicle == null) {
             throw new ParkingLotSystemException
                     (ParkingLotSystemException.ExceptionType.NO_SUCH_VEHICLE, "Vehicles can not be null");
-        } else if (this.vehicle.equals(vehicle))
+        } else if (this.vehicle.contains(vehicle))
             this.vehicle = null;
     }
 
@@ -63,7 +65,7 @@ public class ParkingLotSystem {
      * @return the vehicle is parked
      */
     public boolean isVehicleParked(Vehicle vehicle) {
-        return this.vehicle.equals(vehicle);
+        return this.vehicle.contains(vehicle);
     }
 
     /**
@@ -83,7 +85,7 @@ public class ParkingLotSystem {
      * @return the checked value
      */
     public boolean isParkingLotFull() {
-        return this.vehicle != null;
+        return this.vehicle.size() == this.actualCapacity;
     }
 
     /**
