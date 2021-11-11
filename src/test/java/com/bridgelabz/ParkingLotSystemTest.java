@@ -145,4 +145,18 @@ public class ParkingLotSystemTest {
                     exception.exceptionType);
         }
     }
+
+    @Test
+    void givenVehicles_WhenParkingLotHasSpaceAgain_ShouldInformTheOwner() throws ParkingLotSystemException {
+        parkingLotSystem.addObserver(owner);
+        Vehicle vehicle1 = new Vehicle("FORD", "IN-MH2546");
+        Vehicle vehicle2 = new Vehicle("CHEVROLET", "IN-MP0023");
+        Vehicle vehicle3 = new Vehicle("TATA MOTORS", "WB-2698");
+        parkingLotSystem.park(vehicle1);
+        parkingLotSystem.park(vehicle2);
+        parkingLotSystem.park(vehicle3);
+        Assertions.assertTrue(parkingLotSystem.isParkingLotFull());
+        parkingLotSystem.unPark(vehicle3);
+        Assertions.assertFalse(owner.getParkingLotStatusIfCapacityFull());
+    }
 }
