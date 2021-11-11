@@ -14,10 +14,12 @@ public class ParkingLotSystem {
     private final int actualCapacity;
     private List<Vehicle> vehicle;
     private ParkingLotSystemOwner owner;
+    private List<Observer> observers;
 
 
     public ParkingLotSystem(int capacity) {
         this.vehicle = new ArrayList<>();
+        this.observers = new ArrayList<>();
         this.actualCapacity = capacity;
     }
 
@@ -36,7 +38,9 @@ public class ParkingLotSystem {
      */
     public void park(Vehicle vehicle) throws ParkingLotSystemException {
         if (this.vehicle.size() == this.actualCapacity) {
-            owner.setParkingLotCapacity();
+            for (Observer observer: observers) {
+                observer.setParkingLotCapacity();
+            }
             throw new ParkingLotSystemException
                     (ParkingLotSystemException.ExceptionType.PARKING_LOT_IS_FULL, "Parking Lot is Full");
         }
@@ -91,9 +95,9 @@ public class ParkingLotSystem {
     /**
      * Purpose : This method is created to add parking lot owner observer
      *
-     * @param owner : takes the parking lot owner as parameter
+     * @param observer : takes the parking lot owner as parameter
      */
-    public void addOwnerObserver(ParkingLotSystemOwner owner) {
-        this.owner = owner;
+    public void addObserver(Observer observer) {
+        this.observers.add(observer);
     }
 }

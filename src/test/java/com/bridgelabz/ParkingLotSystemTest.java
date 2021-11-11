@@ -8,11 +8,13 @@ public class ParkingLotSystemTest {
     ParkingLotSystem parkingLotSystem = null;
     Vehicle vehicle = null;
     ParkingLotSystemOwner owner = null;
+    AirportSecurity airportSecurity = null;
 
     @BeforeEach
     void setUp() {
         parkingLotSystem = new ParkingLotSystem(3);
         owner = new ParkingLotSystemOwner();
+        airportSecurity = new AirportSecurity();
     }
 
     @Test
@@ -106,11 +108,31 @@ public class ParkingLotSystemTest {
 
     @Test
     void givenVehicles_WhenParkingLotIsFull_ShouldInformTheOwner() {
-        parkingLotSystem.addOwnerObserver(owner);
+        parkingLotSystem.addObserver(owner);
         Vehicle vehicle1 = new Vehicle("AUDI", "WB-L98754");
         Vehicle vehicle2 = new Vehicle("TOYOTA", "IN-65821");
         Vehicle vehicle3 = new Vehicle("ASTON MARTIN", "UK-0096");
         Vehicle vehicle4 = new Vehicle("VOLKSWAGEN", "JPN-1587");
+        try {
+            parkingLotSystem.park(vehicle1);
+            parkingLotSystem.park(vehicle2);
+            parkingLotSystem.park(vehicle3);
+            parkingLotSystem.park(vehicle4);
+            boolean capacityFull = owner.getParkingLotStatusIfCapacityFull();
+            Assertions.assertTrue(capacityFull);
+        } catch (ParkingLotSystemException exception) {
+            Assertions.assertEquals(ParkingLotSystemException.ExceptionType.PARKING_LOT_IS_FULL,
+                    exception.exceptionType);
+        }
+    }
+
+    @Test
+    void givenVehicles_WhenParkingLotIsFull_ShouldInformTheAirportSecurity() {
+        parkingLotSystem.addObserver(airportSecurity);
+        Vehicle vehicle1 = new Vehicle("BUGATTI", "WB-K96523");
+        Vehicle vehicle2 = new Vehicle("LEXUS", "IN-49821");
+        Vehicle vehicle3 = new Vehicle("FIAT", "UK-1159");
+        Vehicle vehicle4 = new Vehicle("MITSUBISHI", "JPN-2689");
         try {
             parkingLotSystem.park(vehicle1);
             parkingLotSystem.park(vehicle2);

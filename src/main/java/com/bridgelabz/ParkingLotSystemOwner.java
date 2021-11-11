@@ -7,12 +7,13 @@ package com.bridgelabz;
  * @version '1.0-SNAPSHOT'
  * @since 2021-11-10
  */
-public class ParkingLotSystemOwner {
+public class ParkingLotSystemOwner implements Observer {
     private boolean isParkingLotFull;
 
     /**
      * Purpose : This method is created to set the status of full capacity of parking lot
      */
+    @Override
     public void setParkingLotCapacity() {
         isParkingLotFull = true;
     }
