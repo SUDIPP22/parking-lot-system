@@ -12,9 +12,9 @@ import java.util.List;
  */
 public class ParkingLotSystem {
     private final int actualCapacity;
+    private final List<Observer> observers;
     private List<Vehicle> vehicle;
     private ParkingLotSystemOwner owner;
-    private List<Observer> observers;
 
 
     public ParkingLotSystem(int capacity) {
@@ -38,7 +38,7 @@ public class ParkingLotSystem {
      */
     public void park(Vehicle vehicle) throws ParkingLotSystemException {
         if (this.vehicle.size() == this.actualCapacity) {
-            for (Observer observer: observers) {
+            for (Observer observer : observers) {
                 observer.setParkingLotCapacity();
             }
             throw new ParkingLotSystemException
@@ -57,8 +57,12 @@ public class ParkingLotSystem {
         if (this.vehicle == null) {
             throw new ParkingLotSystemException
                     (ParkingLotSystemException.ExceptionType.NO_SUCH_VEHICLE, "Vehicles can not be null");
-        } else if (this.vehicle.contains(vehicle))
+        } else if (this.vehicle.contains(vehicle)) {
             this.vehicle = null;
+            for (Observer observer : observers) {
+                observer.setParkingCapacityAvailable();
+            }
+        }
     }
 
     /**
