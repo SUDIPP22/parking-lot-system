@@ -117,4 +117,17 @@ public class ParkingLotSystem {
         }
         return null;
     }
+
+    /**
+     * Purpose : This method is created to get back the parking time of vehicle
+     *
+     * @param vehicle : takes vehicle as parameter
+     * @return the parking time if the vehicle is parked
+     */
+    public String getVehicleParkingTime(Vehicle vehicle) {
+        if (isVehicleParked(vehicle)) {
+            return vehicle.getParkingTime();
+        }
+        return null;
+    }
 }
