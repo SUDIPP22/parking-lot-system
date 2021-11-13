@@ -11,14 +11,14 @@ import java.util.List;
  * @since 2021-11-09
  */
 public class ParkingLotSystem {
+    private static List<Vehicle> vehicles;
     private final int actualCapacity;
     private final List<Observer> observers;
-    private List<Vehicle> vehicle;
     private ParkingLotSystemOwner owner;
-
+    private Vehicle vehicle;
 
     public ParkingLotSystem(int capacity) {
-        this.vehicle = new ArrayList<>();
+        vehicles = new ArrayList<>();
         this.observers = new ArrayList<>();
         this.actualCapacity = capacity;
     }
@@ -37,14 +37,14 @@ public class ParkingLotSystem {
      * @throws ParkingLotSystemException : when the parking lot is full
      */
     public void park(Vehicle vehicle) throws ParkingLotSystemException {
-        if (this.vehicle.size() == this.actualCapacity) {
+        if (ParkingLotSystem.vehicles.size() == this.actualCapacity) {
             for (Observer observer : observers) {
                 observer.setParkingLotCapacity();
             }
             throw new ParkingLotSystemException
                     (ParkingLotSystemException.ExceptionType.PARKING_LOT_IS_FULL, "Parking Lot is Full");
         }
-        this.vehicle.add(vehicle);
+        ParkingLotSystem.vehicles.add(vehicle);
     }
 
     /**
@@ -57,8 +57,8 @@ public class ParkingLotSystem {
         if (this.vehicle == null) {
             throw new ParkingLotSystemException
                     (ParkingLotSystemException.ExceptionType.NO_SUCH_VEHICLE, "Vehicles can not be null");
-        } else if (this.vehicle.contains(vehicle)) {
-            this.vehicle = null;
+        } else if (ParkingLotSystem.vehicles.contains(vehicle)) {
+            ParkingLotSystem.vehicles = null;
             for (Observer observer : observers) {
                 observer.setParkingCapacityAvailable();
             }
@@ -73,7 +73,7 @@ public class ParkingLotSystem {
      * @return the vehicle is parked
      */
     public boolean isVehicleParked(Vehicle vehicle) {
-        return this.vehicle.contains(vehicle);
+        return ParkingLotSystem.vehicles.contains(vehicle);
     }
 
     /**
@@ -84,7 +84,7 @@ public class ParkingLotSystem {
      * @return the vehicle is unparked
      */
     public boolean isVehicleUnParked(Vehicle vehicle) {
-        return this.vehicle == null;
+        return ParkingLotSystem.vehicles == null;
     }
 
     /**
@@ -93,7 +93,7 @@ public class ParkingLotSystem {
      * @return the checked value
      */
     public boolean isParkingLotFull() {
-        return this.vehicle.size() == this.actualCapacity;
+        return vehicles.size() == this.actualCapacity;
     }
 
     /**
