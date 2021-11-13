@@ -110,12 +110,14 @@ public class ParkingLotSystem {
      *
      * @param vehicle : takes vehicle as parameter
      * @return the vehicle number if the vehicle is parked
+     * @throws ParkingLotSystemException : when no vehicle is found
      */
-    public String getVehiclePosition(Vehicle vehicle) {
+    public String getVehiclePosition(Vehicle vehicle) throws ParkingLotSystemException {
         if (isVehicleParked(vehicle)) {
             return vehicle.getVehicleNumber();
         }
-        return null;
+        throw new ParkingLotSystemException(ParkingLotSystemException.ExceptionType.NO_SUCH_VEHICLE,
+                "No Such Vehicle Found");
     }
 
     /**
@@ -123,11 +125,13 @@ public class ParkingLotSystem {
      *
      * @param vehicle : takes vehicle as parameter
      * @return the parking time if the vehicle is parked
+     * @throws ParkingLotSystemException : when no vehicle is found
      */
-    public String getVehicleParkingTime(Vehicle vehicle) {
+    public String getVehicleParkingTime(Vehicle vehicle) throws ParkingLotSystemException {
         if (isVehicleParked(vehicle)) {
             return vehicle.getParkingTime();
         }
-        return null;
+        throw new ParkingLotSystemException(ParkingLotSystemException.ExceptionType.NO_SUCH_VEHICLE,
+                "No Such Vehicle Parked");
     }
 }
