@@ -104,4 +104,17 @@ public class ParkingLotSystem {
     public void addObserver(Observer observer) {
         this.observers.add(observer);
     }
+
+    /**
+     * Purpose : This method is created to get back the parked car
+     *
+     * @param vehicle : takes vehicle as parameter
+     * @return the vehicle number if the vehicle is parked
+     */
+    public String getVehiclePosition(Vehicle vehicle) {
+        if (isVehicleParked(vehicle)) {
+            return vehicle.getVehicleNumber();
+        }
+        return null;
+    }
 }

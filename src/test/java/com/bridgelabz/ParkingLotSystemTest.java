@@ -138,4 +138,12 @@ public class ParkingLotSystemTest {
         attendant.parkedByAttendant(vehicle);
         Assertions.assertTrue(parkingLotSystem.isVehicleParked(vehicle));
     }
+
+    @Test
+    void givenAVehicle_WhenParked_ThenCheckForVehicle_ShouldReturnVehicle() throws ParkingLotSystemException {
+        Vehicle vehicle = new Vehicle("CHEVROLET", "IN-MP0023");
+        parkingLotSystem.park(vehicle);
+        String vehiclePosition = parkingLotSystem.getVehiclePosition(vehicle);
+        Assertions.assertEquals("IN-MP0023", vehiclePosition);
+    }
 }
