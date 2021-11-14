@@ -1,8 +1,8 @@
 package com.bridgelabz;
 
-        import org.junit.jupiter.api.Assertions;
-        import org.junit.jupiter.api.BeforeEach;
-        import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ParkingLotSystemTest {
     ParkingLotSystem parkingLotSystem = null;
@@ -140,16 +140,20 @@ public class ParkingLotSystemTest {
     }
 
     @Test
-    void givenAVehicle_WhenParked_ThenCheckForVehicle_ShouldReturnVehicle() throws ParkingLotSystemException {
-        Vehicle vehicle = new Vehicle("CHEVROLET", "IN-MP0023", "11:00");
-        parkingLotSystem.park(vehicle);
-        String vehiclePosition = parkingLotSystem.getVehiclePosition(vehicle);
-        Assertions.assertEquals("IN-MP0023", vehiclePosition);
+    void givenAVehicle_WhenParked_ThenCheckForPosition_ShouldReturnPosition() throws ParkingLotSystemException {
+        Vehicle vehicle1 = new Vehicle("CHEVROLET", "IN-MP0023", "11:00");
+        Vehicle vehicle2 = new Vehicle("AUDI", "IN-KL003", "9:00");
+        parkingLotSystem.park(vehicle1);
+        parkingLotSystem.park(vehicle2);
+        int vehiclePositionForVehicle1 = parkingLotSystem.getVehiclePosition(vehicle1);
+        int vehiclePositionForVehicle2 = parkingLotSystem.getVehiclePosition(vehicle2);
+        Assertions.assertEquals(0, vehiclePositionForVehicle1);
+        Assertions.assertEquals(1, vehiclePositionForVehicle2);
     }
 
     @Test
     void givenAVehicle_WhenParked_ThenCheckTimeOfParking_ShouldReturnParkingTime() throws ParkingLotSystemException {
-        Vehicle vehicle = new Vehicle("CHEVROLET", "IN-MP0023", "11:00");
+        Vehicle vehicle = new Vehicle("TOYOTA", "KL-MH25698", "11:00");
         parkingLotSystem.park(vehicle);
         String vehicleParkingTime = parkingLotSystem.getVehicleParkingTime(vehicle);
         Assertions.assertEquals("11:00", vehicleParkingTime);

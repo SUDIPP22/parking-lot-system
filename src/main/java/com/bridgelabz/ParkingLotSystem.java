@@ -106,16 +106,18 @@ public class ParkingLotSystem {
     }
 
     /**
-     * Purpose : This method is created to get back the parked car
+     * Purpose : This method is created to get back the position of parked car
      *
      * @param vehicle : takes vehicle as parameter
-     * @return the vehicle number if the vehicle is parked
+     * @return the position of the vehicle if the vehicle is parked
      * @throws ParkingLotSystemException : when no vehicle is found
      */
-    public String getVehiclePosition(Vehicle vehicle) throws ParkingLotSystemException {
-        if (isVehicleParked(vehicle)) {
-            return vehicle.getVehicleNumber();
-        }
+    public int getVehiclePosition(Vehicle vehicle) throws ParkingLotSystemException {
+        if (isVehicleParked(vehicle))
+            for (Vehicle position : vehicles) {
+                if (position.equals(vehicle))
+                    return vehicles.indexOf(position);
+            }
         throw new ParkingLotSystemException(ParkingLotSystemException.ExceptionType.NO_SUCH_VEHICLE,
                 "No Such Vehicle Found");
     }
@@ -124,12 +126,15 @@ public class ParkingLotSystem {
      * Purpose : This method is created to get back the parking time of vehicle
      *
      * @param vehicle : takes vehicle as parameter
-     * @return the parking time if the vehicle is parked
+     * @return the parking time of the vehicle if the vehicle is parked
      * @throws ParkingLotSystemException : when no vehicle is found
      */
     public String getVehicleParkingTime(Vehicle vehicle) throws ParkingLotSystemException {
         if (isVehicleParked(vehicle)) {
-            return vehicle.getParkingTime();
+            for (Vehicle parkingTimeForVehicle : vehicles) {
+                if (parkingTimeForVehicle.equals(vehicle))
+                    return parkingTimeForVehicle.getParkingTime();
+            }
         }
         throw new ParkingLotSystemException(ParkingLotSystemException.ExceptionType.NO_SUCH_VEHICLE,
                 "No Such Vehicle Parked");
