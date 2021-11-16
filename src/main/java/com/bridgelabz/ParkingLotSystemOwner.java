@@ -14,7 +14,7 @@ public class ParkingLotSystemOwner implements Observer {
      * Purpose : This method is created to set the status of full capacity of parking lot
      */
     @Override
-    public void setParkingLotCapacity() {
+    public void isFullCapacity() {
         isParkingLotFull = true;
     }
 
@@ -22,7 +22,7 @@ public class ParkingLotSystemOwner implements Observer {
      * Purpose : This method is created to set the status of parking capacity available in the parking lot
      */
     @Override
-    public void setParkingCapacityAvailable() {
+    public void isParkingCapacityAvailable() {
         isParkingLotFull = false;
     }
 

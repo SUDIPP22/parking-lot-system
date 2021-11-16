@@ -9,7 +9,7 @@ package com.bridgelabz;
  * @since 2021-11-11
  */
 public interface Observer {
-    void setParkingLotCapacity();
+    void isFullCapacity();
 
-    void setParkingCapacityAvailable();
+    void isParkingCapacityAvailable();
 }

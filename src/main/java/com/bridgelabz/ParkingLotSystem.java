@@ -39,7 +39,7 @@ public class ParkingLotSystem {
     public void park(Vehicle vehicle) throws ParkingLotSystemException {
         if (ParkingLotSystem.vehicles.size() == this.actualCapacity) {
             for (Observer observer : observers) {
-                observer.setParkingLotCapacity();
+                observer.isFullCapacity();
             }
             throw new ParkingLotSystemException
                     (ParkingLotSystemException.ExceptionType.PARKING_LOT_IS_FULL, "Parking Lot is Full");
@@ -58,9 +58,9 @@ public class ParkingLotSystem {
             throw new ParkingLotSystemException
                     (ParkingLotSystemException.ExceptionType.NO_SUCH_VEHICLE, "Vehicles can not be null");
         } else if (ParkingLotSystem.vehicles.contains(vehicle)) {
-            ParkingLotSystem.vehicles = null;
+            ParkingLotSystem.vehicles.remove(vehicle);
             for (Observer observer : observers) {
-                observer.setParkingCapacityAvailable();
+                observer.isParkingCapacityAvailable();
             }
         }
     }
