@@ -33,24 +33,24 @@ public class ParkingLotSystem {
     /**
      * Purpose : This method is created to park the vehicle
      *
-     * @param vehicle : takes vehicle as parameter
+     * @param vehicle : takes vehicle as parameter to park each vehicle in parking lot
      * @throws ParkingLotSystemException : when the parking lot is full
      */
     public void park(Vehicle vehicle) throws ParkingLotSystemException {
-        if (ParkingLotSystem.vehicles.size() == this.actualCapacity) {
+        ParkingLotSystem.vehicles.add(vehicle);
+        if (ParkingLotSystem.vehicles.size() - 1 == this.actualCapacity) {
             for (Observer observer : observers) {
                 observer.isFullCapacity();
             }
             throw new ParkingLotSystemException
                     (ParkingLotSystemException.ExceptionType.PARKING_LOT_IS_FULL, "Parking Lot is Full");
         }
-        ParkingLotSystem.vehicles.add(vehicle);
     }
 
     /**
      * Purpose : This method is created to unpark the vehicle
      *
-     * @param vehicle : takes vehicle as parameter
+     * @param vehicle : takes vehicle as parameter to unpark each vehicle in parking lot
      * @throws ParkingLotSystemException : when there is no vehicle to unpark
      */
     public void unPark(Vehicle vehicle) throws ParkingLotSystemException {
@@ -69,7 +69,7 @@ public class ParkingLotSystem {
      * Purpose : This method is created to check
      * the vehicle is parked or not
      *
-     * @param vehicle : takes vehicle as parameter
+     * @param vehicle : takes vehicle as parameter for checking if that particular vehicle is parked
      * @return the vehicle is parked
      */
     public boolean isVehicleParked(Vehicle vehicle) {
@@ -80,11 +80,11 @@ public class ParkingLotSystem {
      * Purpose : This method is created to check
      * the vehicle is unparked or not
      *
-     * @param vehicle : takes vehicle as parameter
+     * @param vehicle : takes vehicle as parameter for checking if that particular vehicle is unparked
      * @return the vehicle is unparked
      */
     public boolean isVehicleUnParked(Vehicle vehicle) {
-        return ParkingLotSystem.vehicles == null;
+        return !ParkingLotSystem.vehicles.contains(vehicle);
     }
 
     /**
@@ -108,7 +108,7 @@ public class ParkingLotSystem {
     /**
      * Purpose : This method is created to get back the position of parked car
      *
-     * @param vehicle : takes vehicle as parameter
+     * @param vehicle : takes vehicle as parameter to get back the particular vehicle location in parking lot
      * @return the position of the vehicle if the vehicle is parked
      * @throws ParkingLotSystemException : when no vehicle is found
      */
@@ -125,7 +125,7 @@ public class ParkingLotSystem {
     /**
      * Purpose : This method is created to get back the parking time of vehicle
      *
-     * @param vehicle : takes vehicle as parameter
+     * @param vehicle : takes vehicle as parameter for getting back the parking time of that particular vehicle
      * @return the parking time of the vehicle if the vehicle is parked
      * @throws ParkingLotSystemException : when no vehicle is found
      */
