@@ -2,6 +2,8 @@ package com.bridgelabz;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Purpose : To simulate parking lot system
@@ -211,5 +213,20 @@ public class ParkingLotSystem {
             }
         throw new ParkingLotSystemException(ParkingLotSystemException.ExceptionType.NO_SUCH_VEHICLE,
                 "No Such Vehicle Found");
+    }
+
+    /**
+     * Purpose : This method is created to check the validity of vehicle plate numbers
+     *
+     * @param vehicleNumber : takes vehicle number for checking across the regular expression defined in the method
+     * @return : the matching value of that vehicle number if true or false
+     */
+    public boolean validateVehicleNumberPlate(String vehicleNumber) {
+        Pattern pattern = Pattern.compile("^[A-Z]{2}[ -][A-Z]{1,2}[0-9]{4,}$");
+        Matcher matcher = pattern.matcher(vehicleNumber);
+        boolean number = matcher.matches();
+        if (vehicleNumber.isEmpty())
+            return false;
+        return number;
     }
 }
