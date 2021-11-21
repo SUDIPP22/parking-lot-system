@@ -176,4 +176,36 @@ public class ParkingLotSystemTest {
         Assertions.assertEquals(0, positionOfVehicle1);
         Assertions.assertEquals(2, positionOfVehicle3);
     }
+
+    @Test
+    void givenAVehicle_WhenSearchForBlueToyota_ShouldReturnTheLocation() throws ParkingLotSystemException {
+        Vehicle vehicle1 = new Vehicle("BMW", "KL-MH25698", "11:00", "White");
+        Vehicle vehicle2 = new Vehicle("TOYOTA", "KL-MH25698", "11:00", "Red");
+        Vehicle vehicle3 = new Vehicle("TOYOTA", "KL-MH25698", "11:00", "Blue");
+        parkingLotSystem.park(vehicle1);
+        parkingLotSystem.park(vehicle2);
+        parkingLotSystem.park(vehicle3);
+        Assertions.assertThrows(ParkingLotSystemException.class,
+                () -> parkingLotSystem.getBlueColorToyotaVehiclePosition(vehicle1));
+        Assertions.assertThrows(ParkingLotSystemException.class,
+                () -> parkingLotSystem.getBlueColorToyotaVehiclePosition(vehicle2));
+        int positionOfVehicle3 = parkingLotSystem.getBlueColorToyotaVehiclePosition(vehicle3);
+        Assertions.assertEquals(2, positionOfVehicle3);
+    }
+
+    @Test
+    void givenAVehicle_WhenSearchForBlueToyota_ShouldReturnTheVehicleNumber() throws ParkingLotSystemException {
+        Vehicle vehicle1 = new Vehicle("BMW", "KL-JK28678", "11:00", "White");
+        Vehicle vehicle2 = new Vehicle("TOYOTA", "KL-MH25698", "11:00", "Blue");
+        Vehicle vehicle3 = new Vehicle("AUDI", "KL-MP36908", "11:00", "Blue");
+        parkingLotSystem.park(vehicle1);
+        parkingLotSystem.park(vehicle2);
+        parkingLotSystem.park(vehicle3);
+        Assertions.assertThrows(ParkingLotSystemException.class,
+                () -> parkingLotSystem.getBlueColorToyotaVehicleNumber(vehicle1));
+        String actualVehicleNumber = parkingLotSystem.getBlueColorToyotaVehicleNumber(vehicle2);
+        Assertions.assertEquals(vehicle2.getVehicleNumber(), actualVehicleNumber);
+        Assertions.assertThrows(ParkingLotSystemException.class,
+                () -> parkingLotSystem.getBlueColorToyotaVehicleNumber(vehicle3));
+    }
 }

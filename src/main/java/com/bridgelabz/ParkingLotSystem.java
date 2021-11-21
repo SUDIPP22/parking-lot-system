@@ -156,4 +156,42 @@ public class ParkingLotSystem {
         throw new ParkingLotSystemException(ParkingLotSystemException.ExceptionType.NO_SUCH_VEHICLE,
                 "No Such Vehicle Found");
     }
+
+    /**
+     * Purpose : This method is created to know the location of blue color Toyota vehicle
+     *
+     * @param vehicle : takes vehicle as parameter for checking the blue color Toyota vehicle's location
+     * @return the index position of that particular vehicle
+     * @throws ParkingLotSystemException : when no such blue color Toyota vehicle is found
+     */
+    public int getBlueColorToyotaVehiclePosition(Vehicle vehicle) throws ParkingLotSystemException {
+        if (isVehicleParked(vehicle)
+                && vehicle.getVehicleColor().equals("Blue")
+                && vehicle.getName().equals("TOYOTA"))
+            for (Vehicle position : vehicles) {
+                if (position.equals(vehicle))
+                    return vehicles.indexOf(position);
+            }
+        throw new ParkingLotSystemException(ParkingLotSystemException.ExceptionType.NO_SUCH_VEHICLE,
+                "No Such Vehicle Found");
+    }
+
+    /**
+     * Purpose : This method is created to know the vehicle plate number of blue color Toyota vehicle
+     *
+     * @param vehicle : takes vehicle as parameter for checking the blue color Toyota vehicle's plate number
+     * @return the vehicle number of that particular vehicle
+     * @throws ParkingLotSystemException : when no such blue color Toyota is found
+     */
+    public String getBlueColorToyotaVehicleNumber(Vehicle vehicle) throws ParkingLotSystemException {
+        if (isVehicleParked(vehicle)
+                && vehicle.getVehicleColor().equals("Blue")
+                && vehicle.getName().equals("TOYOTA"))
+            for (Vehicle vehicleNumberPlate : vehicles) {
+                if (vehicleNumberPlate.equals(vehicle))
+                    return vehicleNumberPlate.getVehicleNumber();
+            }
+        throw new ParkingLotSystemException(ParkingLotSystemException.ExceptionType.NO_SUCH_VEHICLE,
+                "No Such Vehicle Parked");
+    }
 }
