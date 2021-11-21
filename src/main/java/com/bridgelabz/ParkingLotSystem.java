@@ -139,4 +139,21 @@ public class ParkingLotSystem {
         throw new ParkingLotSystemException(ParkingLotSystemException.ExceptionType.NO_SUCH_VEHICLE,
                 "No Such Vehicle Parked");
     }
+
+    /**
+     * Purpose : This method is created to know the location of all parked white cars
+     *
+     * @param vehicle : takes vehicle as parameter for checking the particular color of parked vehicle is white
+     * @return the index position of the particular vehicle to get back the location
+     * @throws ParkingLotSystemException : when no such white color vehicle is found
+     */
+    public int getWhiteColorVehiclePosition(Vehicle vehicle) throws ParkingLotSystemException {
+        if (isVehicleParked(vehicle) && vehicle.getVehicleColor().equals("White"))
+            for (Vehicle position : vehicles) {
+                if (position.equals(vehicle))
+                    return vehicles.indexOf(position);
+            }
+        throw new ParkingLotSystemException(ParkingLotSystemException.ExceptionType.NO_SUCH_VEHICLE,
+                "No Such Vehicle Found");
+    }
 }

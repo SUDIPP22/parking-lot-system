@@ -158,4 +158,22 @@ public class ParkingLotSystemTest {
         String vehicleParkingTime = parkingLotSystem.getVehicleParkingTime(vehicle);
         Assertions.assertEquals("11:00", vehicleParkingTime);
     }
+
+    @Test
+    void givenAVehicle_WhenSearchForParkedWhiteColorVehicle_ShouldReturnTheLocation() throws ParkingLotSystemException {
+        Vehicle vehicle1 = new Vehicle("TOYOTA", "KL-MH25698", "11:00", "White");
+        Vehicle vehicle2 = new Vehicle("TOYOTA", "KL-MH25698", "11:00", "Red");
+        Vehicle vehicle3 = new Vehicle("TOYOTA", "KL-MH25698", "11:00", "White");
+        parkingLotSystem.park(vehicle1);
+        parkingLotSystem.park(vehicle2);
+        parkingLotSystem.park(vehicle3);
+        int positionOfVehicle1 = parkingLotSystem.getWhiteColorVehiclePosition(vehicle1);
+        Assertions.assertThrows(ParkingLotSystemException.class,
+                () -> parkingLotSystem.getWhiteColorVehiclePosition(vehicle2));
+        int positionOfVehicle3 = parkingLotSystem.getWhiteColorVehiclePosition(vehicle3);
+        System.out.println(positionOfVehicle1);
+        System.out.println(positionOfVehicle3);
+        Assertions.assertEquals(0, positionOfVehicle1);
+        Assertions.assertEquals(2, positionOfVehicle3);
+    }
 }
