@@ -11,11 +11,13 @@ public class Vehicle {
     private final String name;
     private final String vehicleNumber;
     private final String parkingTime;
+    private final String vehicleColor;
 
-    public Vehicle(String name, String vehicleNumber, String parkingTime) {
+    public Vehicle(String name, String vehicleNumber, String parkingTime, String vehicleColor) {
         this.name = name;
         this.vehicleNumber = vehicleNumber;
         this.parkingTime = parkingTime;
+        this.vehicleColor = vehicleColor;
     }
 
     public String getName() {
@@ -28,5 +30,9 @@ public class Vehicle {
 
     public String getParkingTime() {
         return parkingTime;
+    }
+
+    public String getVehicleColor() {
+        return vehicleColor;
     }
 }
