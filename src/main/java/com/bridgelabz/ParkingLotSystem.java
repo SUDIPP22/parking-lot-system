@@ -194,4 +194,22 @@ public class ParkingLotSystem {
         throw new ParkingLotSystemException(ParkingLotSystemException.ExceptionType.NO_SUCH_VEHICLE,
                 "No Such Vehicle Parked");
     }
+
+    /**
+     * Purpose : This method is created to know the location of parked BMW vehicle
+     *
+     * @param vehicle : takes vehicle as parameter to get back the index of that particular vehicle
+     * @return the index position of that particular vehicle
+     * @throws ParkingLotSystemException : when no such parked BMW vehicle is found
+     */
+    public int getBMWVehiclePosition(Vehicle vehicle) throws ParkingLotSystemException {
+        if (isVehicleParked(vehicle)
+                && vehicle.getName().equals("BMW"))
+            for (Vehicle position : vehicles) {
+                if (position.equals(vehicle))
+                    return vehicles.indexOf(position);
+            }
+        throw new ParkingLotSystemException(ParkingLotSystemException.ExceptionType.NO_SUCH_VEHICLE,
+                "No Such Vehicle Found");
+    }
 }
