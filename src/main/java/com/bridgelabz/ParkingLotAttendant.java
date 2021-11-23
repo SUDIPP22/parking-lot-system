@@ -8,7 +8,7 @@ package com.bridgelabz;
  * @since 2021-11-12
  */
 public class ParkingLotAttendant {
-    ParkingLotSystem parkingLotSystem = new ParkingLotSystem(3);
+    ParkingLotSystem parkingLotSystem = new ParkingLotSystem();
 
     /**
      * Purpose : This method is created to park the car by attendant in parking lot
